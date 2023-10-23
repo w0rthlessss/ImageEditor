@@ -1,0 +1,2010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1122</width>
+    <height>732</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BaseEditor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+	background:rgb(43,43,43);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background:rgb(93,93,93);
+}</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>17</number>
+    </property>
+    <property name="topMargin">
+     <number>17</number>
+    </property>
+    <property name="rightMargin">
+     <number>11</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="ImageScrollArea">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QScrollArea{
+	background: rgb(53,53,53);
+	border-right: 2px solid rgb(43,43,43);
+}
+
+/*Vertical slider*/
+
+QScrollBar:vertical{
+	background: rgb(74, 74, 74);
+	border:none;
+	border-radius: 0px;
+	width: 17px;
+	margin: 17px 0 17px 0
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{
+	background:none;
+}
+QScrollBar::up-arrow:vertical{
+	background:none;
+	image: url(C:/CourseProject/test/Icons/arrowUp.png);	
+} 
+QScrollBar::down-arrow:vertical{
+	background: none;
+	image: url(C:/CourseProject/test/Icons/arrowDown.png);
+}
+QScrollBar::handle:vertical{
+	background: rgb(115, 115, 115);
+	border-radius: 4px;
+	min-height: 30px;
+	max-height: 500px;
+}
+QScrollBar::sub-line:vertical{
+	background: rgb(74, 74, 74);
+	border: none;
+	height:17px;
+	subcontrol-position:top;
+	subcontrol-origin:margin;
+}
+QScrollBar::sub-line:vertical:pressed{
+	background: rgb(54, 54, 54);
+}
+QScrollBar::add-line:vertical{
+	background: rgb(74, 74, 74);
+	border: none;
+	height:17px;
+	subcontrol-position:bottom;
+	subcontrol-origin:margin;
+}
+QScrollBar::add-line:vertical:pressed{
+	background: rgb(54, 54, 54);
+}
+
+/*Horizontal slider*/
+
+QScrollBar:horizontal{
+	background: rgb(74, 74, 74);
+	border: none;
+	border-radius: 0px;
+	height: 17px;
+	margin: 0 17px 0 17px;
+}
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal{
+	background:none;
+}
+QScrollBar::left-arrow:horizontal{
+	background:none;
+	image: url(C:/CourseProject/test/Icons/arrowLeft.png);	
+} 
+QScrollBar::right-arrow:horizontal{
+	background: none;
+	image: url(C:/CourseProject/test/Icons/arrowRight.png);	
+}
+QScrollBar::handle:horizontal{
+	background: rgb(115, 115, 115);
+	border-radius: 4px;
+	min-width: 30px;
+	max-width: 600px;
+}
+QScrollBar::sub-line:horizontal{
+	background: rgb(74, 74, 74);
+	border: none;
+	width:17px;
+	subcontrol-position:left;
+	subcontrol-origin:margin;
+}
+QScrollBar::sub-line:horizontal:pressed{
+	background: rgb(54, 54, 54);
+}
+QScrollBar::add-line:horizontal{
+	background: rgb(74, 74, 74);
+	border: none;
+	width:17px;
+	subcontrol-position:right;
+	subcontrol-origin:margin;
+}
+QScrollBar::add-line:horizontal:pressed{
+	background: rgb(54, 54, 54);
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>819</width>
+         <height>634</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: rgb(53,53,53);</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>11</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: rgb(43,43,43)</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="image">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="Effects">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="FilterPropertiesLabel">
+        <property name="styleSheet">
+         <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	border: 2px solid rgb(43,43,43);
+	border-top: 4px solid rgb(43,43,43);
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+        </property>
+        <property name="text">
+         <string>Filter Properties</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="FilterProperties">
+        <property name="styleSheet">
+         <string notr="true">QStackedWidget{
+	border: 2px solid rgb(43,43,43);
+}
+QWidget{
+	background: rgb(63,63,63);
+	
+	color: white;
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="currentIndex">
+         <number>5</number>
+        </property>
+        <widget class="QWidget" name="BasePage">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="baseLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>No filter selected</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="BrightnessContrastPage">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="brightnessContrastLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Brightness / Contrast</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorBrCon">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="brightnessHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="brightnessLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Brightness</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="brightnessIntValue">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="stepType">
+               <enum>QAbstractSpinBox::DefaultStepType</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="brightnessSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: grey;
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="contrastHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="contrastLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Contrast</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="contrastIntValue">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::WheelFocus</enum>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="contrastSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: grey;
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerBrCon">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefaultsBrCon">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="ExposurePage">
+         <property name="windowTitle">
+          <string>BaseEditor</string>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="exposurePageLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Exposure</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorExp">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="exposureHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="exposureLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Exposure</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="exposureIntValue">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::WheelFocus</enum>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="minimum">
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="exposureSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: grey;
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-20</number>
+            </property>
+            <property name="maximum">
+             <number>20</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerExp">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefaultsExp">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="HueSaturationPage">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QLabel" name="hueSaturationPageLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Hue / Saturation</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorHueSat">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hueHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="hueLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Hue</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="hueIntValue">
+              <property name="minimumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="minimum">
+               <number>-180</number>
+              </property>
+              <property name="maximum">
+               <number>180</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="hueSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 0, 0, 255), stop:0.166 rgba(255, 255, 0, 255), stop:0.333 rgba(0, 255, 0, 255), stop:0.5 rgba(0, 255, 255, 255), stop:0.666 rgba(0, 0, 255, 255), stop:0.833 rgba(255, 0, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-180</number>
+            </property>
+            <property name="maximum">
+             <number>180</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="saturationHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="saturationLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Saturation</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="saturationIntValue">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="saturationSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.164179 rgba(255, 255, 255, 255), stop:1 rgba(255, 0, 0, 255));
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="lightnessHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="lightnessLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Lightness</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="lightnessIntValue">
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="lightnessSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerHueSat">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefautsHueSat">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="BlackAndWhitePage">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="bnwPageLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Black &amp; White</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorGray">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerGrayTop">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setGrayscaleBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	height: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Make grayscale</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerGrayBot">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefaultsGray">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="BlurPage">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="blurPageLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Blur</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorBlur">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="blurHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Gaussian blur</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="blurIntValue">
+              <property name="minimumSize">
+               <size>
+                <width>45</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="blurSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: grey;
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerBlur">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefaultsBlur">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="NoisePage">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QLabel" name="noisePageLabel">
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+            </property>
+            <property name="text">
+             <string>Noise</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="separatorNoise">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="noiseHorizontalLayout">
+            <item>
+             <widget class="QLabel" name="noiseLabel">
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>Add noise</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="noiseIntValue">
+              <property name="minimumSize">
+               <size>
+                <width>45</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>45</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QSpinBox{
+	border:1px solid grey;
+	border-radius:2px;
+	background:rgb(53,53,53);
+}
+</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="showGroupSeparator" stdset="0">
+               <bool>true</bool>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="noiseSlider">
+            <property name="styleSheet">
+             <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 3px; 
+    background: grey;
+    margin: 15px 0;
+}
+QSlider::handle:horizontal {
+    background: white;
+    border: 1px solid #5c5c5c;
+    width: 5px;
+    margin: -12px 0; 
+    border-radius: 5px;
+}</string>
+            </property>
+            <property name="maximum">
+             <number>200</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacerNoise">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="setDefaultsNoise">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border: 1px solid rgb(43,43,43);
+	border-radius: 6px;
+	min-width: 30px;
+	background: rgb(123, 123, 123);
+	color:white;
+}
+QPushButton::pressed{
+	background: rgb(83,83,83);
+}</string>
+            </property>
+            <property name="text">
+             <string>Set defaults</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="FilterListLabel">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel{
+	background: rgb(63,63,63);
+	color: white;
+	border: 2px solid rgb(43,43,43);
+	padding: 5px;
+	font: 700 10pt &quot;Arial&quot;;
+}</string>
+        </property>
+        <property name="text">
+         <string>Filter List</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="FilterList">
+        <property name="cursor" stdset="0">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QListWidget{
+	border: 2px solid rgb(43,43,43);
+	border-bottom: none;
+	background:rgb(63,63,63);
+	color:white;
+	font: 11pt &quot;Arial&quot;;
+}
+QListWidget::item{
+	height: 35px;
+	padding: 5px;
+	border-bottom: 2px solid rgb(43,43,43);
+	margin: 0 0 5px 0;
+	border-right: 2px solid rgb(43,43,43);
+	border-radius: 3;
+	background:rgb(83,83,83);
+}
+QListWidget::item:selected{
+	background: rgb(103,103,103);
+	color: white;
+}
+/*Vertical slider*/
+QScrollBar:vertical{
+	background: rgb(74, 74, 74);
+	border: none;
+	border-radius: 0px;
+	width: 17px;
+	margin: 17px 0 17px 0
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{
+	background:none;
+}
+QScrollBar::up-arrow:vertical{
+	background:none;
+	image: url(C:/CourseProject/test/Icons/arrowUp.png);	
+} 
+QScrollBar::down-arrow:vertical{
+	background: none;
+	image: url(C:/CourseProject/test/Icons/arrowDown.png);
+}
+QScrollBar::handle:vertical{
+	background: rgb(115, 115, 115);
+	border-radius: 4px;
+	min-height: 30px;
+	/*Add max value*/
+}
+QScrollBar::sub-line:vertical{
+	background: rgb(74, 74, 74);
+	border: none;
+	height:17px;
+	subcontrol-position:top;
+	subcontrol-origin:margin;
+}
+QScrollBar::sub-line:vertical:pressed{
+	background: rgb(54, 54, 54);
+}
+QScrollBar::add-line:vertical{
+	background: rgb(74, 74, 74);
+	border: none;
+	height:17px;
+	subcontrol-position:bottom;
+	subcontrol-origin:margin;
+}
+QScrollBar::add-line:vertical:pressed{
+	background: rgb(54, 54, 54);
+}
+</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
+        <property name="autoScroll">
+         <bool>true</bool>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::NoDragDrop</enum>
+        </property>
+        <property name="defaultDropAction">
+         <enum>Qt::IgnoreAction</enum>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="textElideMode">
+         <enum>Qt::ElideRight</enum>
+        </property>
+        <property name="verticalScrollMode">
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
+        </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Fixed</enum>
+        </property>
+        <property name="layoutMode">
+         <enum>QListView::SinglePass</enum>
+        </property>
+        <property name="selectionRectVisible">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Brightness / Contrast</string>
+         </property>
+         <property name="flags">
+          <set>ItemIsSelectable|ItemIsEnabled</set>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Exposure</string>
+         </property>
+         <property name="flags">
+          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Hue / Saturation</string>
+         </property>
+         <property name="flags">
+          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Black &amp; White</string>
+         </property>
+         <property name="flags">
+          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Blur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Noise</string>
+         </property>
+         <property name="flags">
+          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1122</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar{
+	background: rgb(83, 83, 83); 
+	spacing: 5px; 
+	color: white;
+	border-bottom:2px solid rgb(43,43,43);
+	padding: 3px;
+	border-radius: 4px;
+}
+QMenuBar::item:selected {
+	background: rgb(75, 75, 75); 
+	border: 1px solid rgb(150, 150, 150); 
+	border-radius: 4px;
+}
+QMenuBar::item:pressed {
+	background: rgb(68, 68, 68);
+}
+</string>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="styleSheet">
+     <string notr="true">QMenu{
+	background: rgb(80, 80, 80); 
+	color: white; 
+}
+QMenu::item:selected{
+	background: rgb(75, 75, 75);
+}
+QMenu::item:pressed{
+	background: rgb(68, 68, 68);
+}
+
+</string>
+    </property>
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="styleSheet">
+     <string notr="true">QMenu{
+	background: rgb(80, 80, 80); 
+	color: white; 
+}
+QMenu::item:selected{
+	background: rgb(75, 75, 75);
+}
+QMenu::item:pressed{
+	background: rgb(68, 68, 68);
+}
+
+</string>
+    </property>
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionRotate_90_clockwise"/>
+    <addaction name="actionRotate_90_counterclockwise"/>
+    <addaction name="actionRotate_180"/>
+    <addaction name="separator"/>
+    <addaction name="actionFlip_Horizontal"/>
+    <addaction name="actionFlip_Vertical"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>45</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolBar{
+	background: rgb(83,83,83);
+	border-top: 2px solid rgb(43,43,43);
+	border-bottom: 4px solid rgb(43,43,43);
+	border-radius: 4px;
+	spacing: 6px;
+}
+QToolBar QToolButton:hover{
+	background-color: rgb(68,68,68);
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 3px;
+}
+QToolBar QToolButton:pressed{
+	background-color: rgb(63,63,63);
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 3px;
+	padding:0;
+}
+QToolBar QToolButton:checked{
+	background-color: rgb(63,63,63);
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 3px;
+	padding:0;
+}
+QToolBar QToolButton:unchecked{
+	background-color: rgb(68,68,68);
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 3px;
+}</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="actionCrop"/>
+   <addaction name="actionZoomIn"/>
+   <addaction name="actionZoomOut"/>
+  </widget>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/open.png</normaloff>:/icons/Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/undo.png</normaloff>:/icons/Icons/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/redo.png</normaloff>:/icons/Icons/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="actionRotate_90_clockwise">
+   <property name="text">
+    <string>Rotate 90° clockwise</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionRotate_90_counterclockwise">
+   <property name="text">
+    <string>Rotate 90° counterclockwise</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+R</string>
+   </property>
+  </action>
+  <action name="actionRotate_180">
+   <property name="text">
+    <string>Rotate 180°</string>
+   </property>
+  </action>
+  <action name="actionFlip_Horizontal">
+   <property name="text">
+    <string>Flip Horizontal</string>
+   </property>
+  </action>
+  <action name="actionFlip_Vertical">
+   <property name="text">
+    <string>Flip Vertical</string>
+   </property>
+  </action>
+  <action name="actionScale">
+   <property name="text">
+    <string>Scale</string>
+   </property>
+  </action>
+  <action name="actionDimensions">
+   <property name="text">
+    <string>Dimensions</string>
+   </property>
+  </action>
+  <action name="actionCrop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/crop.png</normaloff>:/icons/Icons/crop.png</iconset>
+   </property>
+   <property name="text">
+    <string>Crop</string>
+   </property>
+   <property name="toolTip">
+    <string>Crop image</string>
+   </property>
+   <property name="shortcut">
+    <string>C</string>
+   </property>
+  </action>
+  <action name="actionZoomIn">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/zoomIn.png</normaloff>:/icons/Icons/zoomIn.png</iconset>
+   </property>
+   <property name="text">
+    <string>ZoomIn</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom In</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+=</string>
+   </property>
+  </action>
+  <action name="actionZoomOut">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/Icons/zoomOut.png</normaloff>:/icons/Icons/zoomOut.png</iconset>
+   </property>
+   <property name="text">
+    <string>ZoomOut</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom Out</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>brightnessSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>brightnessIntValue</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1073</x>
+     <y>160</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>brightnessIntValue</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>brightnessSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1073</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>981</x>
+     <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exposureIntValue</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>exposureSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1065</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>981</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exposureSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>exposureIntValue</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>981</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1065</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
