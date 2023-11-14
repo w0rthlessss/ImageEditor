@@ -5,8 +5,11 @@
 
 class Effects
 {
+
 public:
     Effects() = default;
+
+    static cv::Mat MakeNoiseMap(cv::Mat img);
 
     static void MakeBrightnessEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value);
 

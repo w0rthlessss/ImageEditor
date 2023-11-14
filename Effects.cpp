@@ -1,5 +1,13 @@
 #include "Effects.h"
 
+cv::Mat Effects::MakeNoiseMap(cv::Mat image){
+    cv::Mat noise = cv::Mat::zeros(image.size(), image.type());
+    cv::randn(noise, 128, 20);
+    cv::cvtColor(noise, noise, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(noise, noise, cv::COLOR_GRAY2BGR);
+    return noise;
+}
+
 void Effects::MakeBrightnessEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
 
     cv::Mat temp;
@@ -84,13 +92,15 @@ void Effects::MakeLightnessEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int valu
 }
 
 void Effects::MakeGrayscaleEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
-    cv::Mat updatedImage{};
 
-    cv::cvtColor(imgBefore, updatedImage, cv::COLOR_BGR2GRAY);
+    if(value){
+        cv::Mat updatedImage{};
+        cv::cvtColor(imgBefore, updatedImage, cv::COLOR_BGR2GRAY);
 
-    imgAfter = updatedImage;
+        imgAfter = updatedImage;
 
-    cv::cvtColor(imgAfter, imgAfter, cv::COLOR_GRAY2BGR);
+        cv::cvtColor(imgAfter, imgAfter, cv::COLOR_GRAY2BGR);
+    }
 }
 
 void Effects::MakeBlurEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
@@ -104,18 +114,10 @@ void Effects::MakeBlurEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
 }
 
 void Effects::MakeNoiseEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
-    std::srand(static_cast<unsigned int>(std::time(NULL)));
-    cv::Mat temp = imgBefore.clone();
-
-
-    cv::Mat img_16SC;
-    cv::Mat noise = cv::Mat(imgBefore.size(), CV_16SC3);
-    cv::randn(noise, cv::Scalar::all(0.0), cv::Scalar::all(static_cast<double>(value)));
-
-    imgBefore.convertTo(img_16SC, CV_16SC3);
-    cv::addWeighted(img_16SC, 1.0, noise, 1.0, 0.0, img_16SC);
-
-    img_16SC.convertTo(temp, imgBefore.type());
+    cv::Mat temp = imgAfter.clone();
+    double weight = static_cast<double>(value)/100;
+    cv::addWeighted(temp, 1.0 - weight, imgBefore, weight, 0.0, temp);
+    cv::normalize(temp, temp, 0, 255, cv::NORM_MINMAX, imgAfter.type());
 
     imgAfter = temp;
 
