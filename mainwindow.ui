@@ -1667,11 +1667,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{
 }
 QScrollBar::up-arrow:vertical{
 	background:none;
-	image: url(C:/CourseProject/test/Icons/arrowUp.png);	
+	image: url(:/Icons/arrowUp.png);	
 } 
 QScrollBar::down-arrow:vertical{
 	background: none;
-	image: url(C:/CourseProject/test/Icons/arrowDown.png);
+	image: url(:/Icons/arrowDown.png);
 }
 QScrollBar::handle:vertical{
 	background: rgb(115, 115, 115);
@@ -1714,11 +1714,11 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal{
 }
 QScrollBar::left-arrow:horizontal{
 	background:none;
-	image: url(C:/CourseProject/test/Icons/arrowLeft.png);	
+	image: url(:/Icons/arrowLeft.png);	
 } 
 QScrollBar::right-arrow:horizontal{
 	background: none;
-	image: url(C:/CourseProject/test/Icons/arrowRight.png);	
+	image: url(:/Icons/arrowRight.png);	
 }
 QScrollBar::handle:horizontal{
 	background: rgb(115, 115, 115);

@@ -1,14 +1,15 @@
 <RCC>
-    <qresource prefix="/icons">
+    <qresource prefix="/">
         <file>Icons/arrowDown.png</file>
         <file>Icons/arrowLeft.png</file>
         <file>Icons/arrowRight.png</file>
         <file>Icons/arrowUp.png</file>
-        <file>Icons/crop.png</file>
-        <file>Icons/open.png</file>
         <file>Icons/redo.png</file>
         <file>Icons/undo.png</file>
         <file>Icons/zoomIn.png</file>
         <file>Icons/zoomOut.png</file>
+        <file>Icons/crop.png</file>
+        <file>Icons/open.png</file>
+        <file>Icons/logo.png</file>
     </qresource>
 </RCC>
