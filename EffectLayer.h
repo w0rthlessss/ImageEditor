@@ -3,7 +3,9 @@
 
 #include "Effects.h"
 
-class EffectLayer
+enum EffectNames{base, brightness, contrast, exposure, hue, saturation, lightness, gray, blur, noise};
+
+class EffectLayer : private Effects
 {
 private:
     //cv::Mat layer;
@@ -19,6 +21,7 @@ public:
     int GetIndex();
     int GetValue();
     void ApplyEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value);
+    bool operator!=(const EffectLayer& other);
     //cv::Mat GetLayer();
     ~EffectLayer() = default;
 };

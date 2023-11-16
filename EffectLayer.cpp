@@ -1,6 +1,5 @@
 #include "EffectLayer.h"
 
-
 EffectLayer::EffectLayer(int index, int value, void (*effect)(cv::Mat&, cv::Mat, int))
 {
     this->effectIndex = index;
@@ -27,3 +26,8 @@ int EffectLayer::GetValue(){
 void EffectLayer::ApplyEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
     Effect(imgAfter, imgBefore, value);
 }
+
+bool EffectLayer::operator!=(const EffectLayer &other){
+    return this->value != other.value;
+}
+

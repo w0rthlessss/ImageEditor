@@ -28,6 +28,7 @@ public:
     static void MakeBlurEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value);
 
     static void MakeNoiseEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value);
+
 };
 
 #endif // EFFECTS_H

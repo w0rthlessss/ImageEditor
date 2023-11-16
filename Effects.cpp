@@ -37,7 +37,6 @@ void Effects::MakeContrastEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value
 }
 
 void Effects::MakeExposureEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
-    //double beta = 1 + 0.01 * value;
     MakeBrightnessEffect(imgAfter, imgBefore, value);
     MakeContrastEffect(imgAfter, imgAfter, value);
 }
@@ -116,7 +115,7 @@ void Effects::MakeBlurEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
 void Effects::MakeNoiseEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value){
     cv::Mat temp = imgAfter.clone();
     double weight = static_cast<double>(value)/100;
-    cv::addWeighted(temp, 1.0 - weight, imgBefore, weight, 0.0, temp);
+    cv::addWeighted(temp, 1.1 - weight, imgBefore, weight, 0.0, temp);
     cv::normalize(temp, temp, 0, 255, cv::NORM_MINMAX, imgAfter.type());
 
     imgAfter = temp;

@@ -2,19 +2,23 @@
 #define ADDCOMMAND_H
 
 #include <QUndoCommand>
-#include "mainwindow.h"
+#include "EffectLayer.h"
 
 class AddCommand : public QUndoCommand
 {
 private:
-
-    cv::Mat image;
+    cv::Mat* targetImage;
     cv::Mat imageBefore;
-    MainWindow *window = nullptr;
+    cv::Mat imageAfter;
+    std::vector<EffectLayer>* targetState;
+    std::vector<EffectLayer> previousStates;
+    std::vector<EffectLayer> currentStates;
 
 public:
 
-    AddCommand(cv::Mat &image, cv::Mat &imageBefore, MainWindow *window, QUndoCommand *parent = nullptr);
+    AddCommand(cv::Mat *targetImage, cv::Mat imageBefore, cv::Mat imageAfter,
+               std::vector<EffectLayer> *targetState, std::vector<EffectLayer> previousStates,
+               std::vector<EffectLayer> currentStates, QString text, QUndoCommand *parent = nullptr);
 
     void undo() override;
 
