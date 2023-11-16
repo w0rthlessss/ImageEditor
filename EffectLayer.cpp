@@ -4,11 +4,7 @@ EffectLayer::EffectLayer(int index, int value, void (*effect)(cv::Mat&, cv::Mat,
 {
     this->effectIndex = index;
     this->value = value;
-    isVisible = true;
     Effect = effect;
-}
-void EffectLayer::SetVisible(bool checked){
-    isVisible = checked;
 }
 
 void EffectLayer::SetValue(int value){

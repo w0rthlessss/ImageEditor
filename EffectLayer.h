@@ -11,12 +11,10 @@ private:
     //cv::Mat layer;
     int effectIndex;
     int value;
-    bool isVisible;
     void (*Effect)(cv::Mat&, cv::Mat, int);
 public:
     EffectLayer() = default;
     EffectLayer(int index, int value, void (*effect)(cv::Mat&, cv::Mat, int));
-    void SetVisible(bool);
     void SetValue(int);
     int GetIndex();
     int GetValue();
