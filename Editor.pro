@@ -14,6 +14,7 @@ SOURCES += \
     ConvertImage.cpp \
     EffectLayer.cpp \
     Effects.cpp \
+    SelectableImage.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     ConvertImage.h \
     EffectLayer.h \
     Effects.h \
+    SelectableImage.h \
     mainwindow.h
 
 FORMS += \

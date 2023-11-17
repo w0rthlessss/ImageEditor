@@ -4,6 +4,8 @@
 #include <QImageWriter>
 #include <QMessageBox>
 #include <QIcon>
+#include <QStandardPaths>
+#include "SelectableImage.h"
 #include "AddCommand.h"
 
 
@@ -19,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
     EnableInterface(false);
     isSaved = true;
     undoStack = new QUndoStack(this);
-    undoStack->setUndoLimit(10);
 }
 
 void MainWindow::SetPropertiesPage(){
@@ -109,11 +110,14 @@ void MainWindow::SetDefaultValues(){
 
     if(currentEffectIndex==EffectNames::gray) ui->setGrayscaleBtn->setEnabled(true);
 
+
+
     for(auto it = effectLayers.begin(); it != effectLayers.end(); it++){
         if(it->GetIndex() == currentEffectIndex) it->SetValue(0);
     }
 
     undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, "Set default values"));
+    previousState = effectLayers;
 
     UpdateImage();
 
@@ -202,6 +206,10 @@ void MainWindow::SetConnections(){
     connect(ui->actionUndo, SIGNAL(triggered(bool)), this, SLOT(UndoAction()));
     connect(ui->actionRedo, SIGNAL(triggered(bool)), this, SLOT(RedoAction()));
 
+    //Crop
+    connect(ui->actionCrop, SIGNAL(triggered(bool)), ui->image, SLOT(IsTriggered()));
+    connect(ui->image, SIGNAL(SelectionFinished(bool)), this, SLOT(Crop()));
+
 }
 
 void MainWindow::SetupEffectLayers(){
@@ -236,7 +244,10 @@ void MainWindow::SetupEffectLayers(){
 }
 
 void MainWindow::OpenFile(){
-    QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"), tr("C:/Users/mrkub/OneDrive/Изображения/TestImg"), tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+    QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"),
+        picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
+        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
     if(!filepath.isEmpty()){
         image.load(filepath);
         UpdateResolutionLabel();
@@ -259,7 +270,7 @@ void MainWindow::OpenFile(){
         SetupEffectLayers();
         previousState = effectLayers;
         undoStack->clear();
-
+        ui->actionCrop->setChecked(false);
         ui->FilterProperties->setCurrentIndex(0);
         ui->FilterList->setCurrentRow(-1);
         scaleValue = 1.0;
@@ -270,7 +281,11 @@ void MainWindow::OpenFile(){
 
 void MainWindow::SaveImage(){
     if(image.isNull()) return;
-    QString filepath = QFileDialog::getSaveFileName(this, tr("Save File"), tr("C:/Users/mrkub/OneDrive/Изображения/TestImg"), tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+    QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"),
+        picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
+        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+
     if(!filepath.isEmpty()){
         UpdateImage();
         image = ConvertImage::CVMatToQImage(imgForDisplay);
@@ -290,14 +305,14 @@ void MainWindow::SaveImage(){
 void MainWindow::ExitApplication(){
     if(!isSaved){
         QMessageBox::StandardButton reply = QMessageBox::question(this, MainWindow::windowTitle(),
-                                                                  tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No);
+            tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No);
         if(reply == QMessageBox::Yes) SaveImage();
     }
     close();
 
 }
 
-void MainWindow::closeEvent(QCloseEvent *){
+void MainWindow::closeEvent(QCloseEvent*){
     ExitApplication();
 }
 
@@ -331,6 +346,7 @@ void MainWindow::UndoAction(){
         UpdateImage();
         UpdateSliderValues();
     }
+
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
 }
@@ -550,11 +566,36 @@ void MainWindow::FlipVertical(){
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
 }
 
+void MainWindow::Crop(){
+    ui->actionCrop->setChecked(false);
+    QRect area = ui->image->SelectionRect();
+    int x = area.x() / scaleValue;
+    int y = area.y() / scaleValue;
+    int width = area.width() / scaleValue;
+    int height = area.height() / scaleValue;
 
+    x = std::max(0, std::min(x, imgForEditing.cols-1));
+    y = std::max(0, std::min(y, imgForEditing.rows-1));
+    width = std::min(width, imgForEditing.cols - x);
+    height = std::min(height, imgForEditing.rows - y);
+
+    cv::Mat cropped = imgForEditing(cv::Rect(x, y, width, height)).clone();
+
+    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, cropped, &effectLayers, effectLayers, effectLayers, "Cropped" ));
+
+    imgForEditing = cropped.clone();
+
+    UpdateImage();
+
+    if(scaleValue != 1.0) ScaleImage(0.0);
+    else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete undoStack;
+    delete scaleLabel;
+    delete resolutionLabel;
 }
 
