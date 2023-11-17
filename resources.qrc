@@ -11,5 +11,12 @@
         <file>Icons/crop.png</file>
         <file>Icons/open.png</file>
         <file>Icons/logo.png</file>
+        <file>Icons/exit.png</file>
+        <file>Icons/flipHor.png</file>
+        <file>Icons/flipVer.png</file>
+        <file>Icons/rotate180.png</file>
+        <file>Icons/rotateClockwise.png</file>
+        <file>Icons/rotateCounterClockwise.png</file>
+        <file>Icons/save.png</file>
     </qresource>
 </RCC>

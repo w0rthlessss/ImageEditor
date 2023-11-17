@@ -1659,7 +1659,7 @@ QScrollBar::add-line:vertical:pressed{
        <bool>true</bool>
       </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>1</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -1804,7 +1804,7 @@ QScrollBar::add-line:horizontal:pressed{
         </rect>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -1844,12 +1844,15 @@ QScrollBar::add-line:horizontal:pressed{
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <widget class="QLabel" name="image">
+            <widget class="SelectableImage" name="image">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="mouseTracking">
+              <bool>true</bool>
              </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
@@ -1987,25 +1990,27 @@ QToolBar QToolButton:hover{
 	background-color: rgb(68,68,68);
 	border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
-	padding:0;
+	padding: 0px;
 }
 QToolBar QToolButton:pressed{
 	background-color: rgb(63,63,63);
 	border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
-	padding:0;
+	padding: 0px;
+	margin: 0px;
 }
 QToolBar QToolButton:checked{
 	background-color: rgb(63,63,63);
 	border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
-	padding:0;
+	padding: 0px;
+	margin: 0px;
 }
 QToolBar QToolButton:unchecked{
 	background-color: rgb(68,68,68);
 	border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
-	padding:0;
+	padding: 0px;
 }</string>
    </property>
    <property name="movable">
@@ -2055,6 +2060,10 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/save.png</normaloff>:/Icons/save.png</iconset>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -2063,6 +2072,10 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>
@@ -2098,6 +2111,10 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
   <action name="actionRotate_90_clockwise">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/rotateClockwise.png</normaloff>:/Icons/rotateClockwise.png</iconset>
+   </property>
    <property name="text">
     <string>Rotate 90° clockwise</string>
    </property>
@@ -2106,6 +2123,10 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
   <action name="actionRotate_90_counterclockwise">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/rotateCounterClockwise.png</normaloff>:/Icons/rotateCounterClockwise.png</iconset>
+   </property>
    <property name="text">
     <string>Rotate 90° counterclockwise</string>
    </property>
@@ -2114,16 +2135,28 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
   <action name="actionRotate_180">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/rotate180.png</normaloff>:/Icons/rotate180.png</iconset>
+   </property>
    <property name="text">
     <string>Rotate 180°</string>
    </property>
   </action>
   <action name="actionFlip_Horizontal">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/flipHor.png</normaloff>:/Icons/flipHor.png</iconset>
+   </property>
    <property name="text">
     <string>Flip Horizontal</string>
    </property>
   </action>
   <action name="actionFlip_Vertical">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/flipVer.png</normaloff>:/Icons/flipVer.png</iconset>
+   </property>
    <property name="text">
     <string>Flip Vertical</string>
    </property>
@@ -2187,6 +2220,13 @@ QToolBar QToolButton:unchecked{
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SelectableImage</class>
+   <extends>QLabel</extends>
+   <header>SelectableImage.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

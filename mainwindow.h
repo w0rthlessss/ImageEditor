@@ -51,6 +51,7 @@ public slots:
     void RotateUpsideDown();
     void FlipVertical();
     void FlipHorizontal();
+    void Crop();
 
 public:
     MainWindow(QWidget *parent = nullptr);
