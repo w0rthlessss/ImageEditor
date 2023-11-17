@@ -116,7 +116,7 @@ void MainWindow::SetDefaultValues(){
         if(it->GetIndex() == currentEffectIndex) it->SetValue(0);
     }
 
-    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, "Set default values"));
+    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, &noiseMat, noiseMat, noiseMat, "Set default values"));
     previousState = effectLayers;
 
     UpdateImage();
@@ -319,7 +319,7 @@ void MainWindow::closeEvent(QCloseEvent*){
 void MainWindow::CheckDifferences(){
     for(size_t i = 0; i<effectLayers.size(); i++){
         if(effectLayers[i] != previousState[i]){
-            undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, "Effect value changed"));
+            undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, &noiseMat, noiseMat, noiseMat, "Effect value changed"));
             previousState = effectLayers;
             break;
         }
@@ -505,7 +505,7 @@ void MainWindow::RotateClockwise(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_90_CLOCKWISE);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate 90"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, noiseMat, "Rotate 90"));
 
     UpdateImage();
 
@@ -518,7 +518,7 @@ void MainWindow::RotateCounterClockwise(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_90_COUNTERCLOCKWISE);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate -90"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, noiseMat, "Rotate -90"));
 
     UpdateImage();
 
@@ -531,7 +531,7 @@ void MainWindow::RotateUpsideDown(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_180);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate 180"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, noiseMat, "Rotate 180"));
 
     UpdateImage();
 
@@ -544,7 +544,7 @@ void MainWindow::FlipHorizontal(){
 
     cv::flip(imgForEditing, imgForEditing, 1);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Flip Horizontal"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, noiseMat, "Flip Horizontal"));
 
     UpdateImage();
 
@@ -557,7 +557,7 @@ void MainWindow::FlipVertical(){
 
     cv::flip(imgForEditing, imgForEditing, 0);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Flip Vertical"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, noiseMat, "Flip Vertical"));
 
 
     UpdateImage();
@@ -580,11 +580,12 @@ void MainWindow::Crop(){
     height = std::min(height, imgForEditing.rows - y);
 
     cv::Mat cropped = imgForEditing(cv::Rect(x, y, width, height)).clone();
+    cv::Mat croppedNoise = noiseMat(cv::Rect(x, y, width, height)).clone();
 
-    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, cropped, &effectLayers, effectLayers, effectLayers, "Cropped" ));
+    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, cropped, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, croppedNoise, "Cropped" ));
 
     imgForEditing = cropped.clone();
-
+    noiseMat = croppedNoise.clone();
     UpdateImage();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
