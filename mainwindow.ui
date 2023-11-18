@@ -1821,7 +1821,7 @@ QScrollBar::add-line:horizontal:pressed{
          <x>0</x>
          <y>0</y>
          <width>819</width>
-         <height>634</height>
+         <height>626</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -2225,7 +2225,7 @@ QToolBar QToolButton:unchecked{
     <string>Zoom In</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+=</string>
+    <string>Ctrl++</string>
    </property>
   </action>
   <action name="actionZoomOut">

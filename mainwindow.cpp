@@ -53,7 +53,7 @@ void MainWindow::ZoomIn(){
 void MainWindow::ZoomOut(){
     if(!image.isNull())
     {
-        if(scaleValue>=0.2)
+        if(scaleValue>0.21)
             ScaleImage(-0.2);
     }
 }
