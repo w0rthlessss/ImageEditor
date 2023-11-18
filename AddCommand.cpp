@@ -4,7 +4,6 @@ AddCommand::AddCommand(cv::Mat *targetImage, cv::Mat imageBefore, cv::Mat imageA
     std::vector<EffectLayer> *targetState, std::vector<EffectLayer> previousStates,
     std::vector<EffectLayer> currentStates, cv::Mat *targetNoise, cv::Mat noiseBefore,
     cv::Mat noiseAfter, QString text, QUndoCommand *parent) : QUndoCommand(text, parent)
-
     {
         this->targetImage = targetImage;
         this->imageBefore = imageBefore;
@@ -15,7 +14,6 @@ AddCommand::AddCommand(cv::Mat *targetImage, cv::Mat imageBefore, cv::Mat imageA
         this->targetNoise = targetNoise;
         this->noiseBefore = noiseBefore;
         this->noiseAfter = noiseAfter;
-
     }
 
 AddCommand::AddCommand(cv::Mat *targetImage, cv::Mat imageBefore, cv::Mat imageAfter,

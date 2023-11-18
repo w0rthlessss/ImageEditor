@@ -24,6 +24,7 @@ public:
                std::vector<EffectLayer> currentStates, cv::Mat *targetNoise, cv::Mat noiseBefore,
                cv::Mat noiseAfter, QString text, QUndoCommand *parent = nullptr);
 
+
     AddCommand(cv::Mat *targetImage, cv::Mat imageBefore, cv::Mat imageAfter,
                std::vector<EffectLayer> *targetState, cv::Mat *targetNoise, QString text,
                QUndoCommand* parent = nullptr);
@@ -34,6 +35,8 @@ public:
 
     AddCommand(cv::Mat *targetImage, std::vector<EffectLayer> *targetState, cv::Mat *targetNoise,
                cv::Mat noiseBefore, cv::Mat noiseAfter, QString text, QUndoCommand *parent = nullptr);
+
+
 
     void undo() override;
 

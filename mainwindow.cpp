@@ -321,7 +321,9 @@ void MainWindow::closeEvent(QCloseEvent* event){
 void MainWindow::CheckDifferences(){
     for(size_t i = 0; i<effectLayers.size(); i++){
         if(effectLayers[i] != previousState[i]){
+
             undoStack->push(new AddCommand(&imgForEditing, &effectLayers, previousState, effectLayers, &noiseMat, "Effect value changed"));
+
             previousState = effectLayers;
             break;
         }
@@ -507,9 +509,7 @@ void MainWindow::RotateClockwise(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_90_CLOCKWISE);
 
-
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 90"));
-
 
     UpdateImage();
 
@@ -524,7 +524,6 @@ void MainWindow::RotateCounterClockwise(){
 
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate -90"));
 
-
     UpdateImage();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
@@ -537,7 +536,6 @@ void MainWindow::RotateUpsideDown(){
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_180);
 
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 180"));
-
 
     UpdateImage();
 
@@ -563,9 +561,7 @@ void MainWindow::FlipVertical(){
 
     cv::flip(imgForEditing, imgForEditing, 0);
 
-
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Flip Vertical"));
-
 
     UpdateImage();
 
