@@ -237,6 +237,9 @@ QSlider::handle:horizontal {
             <property name="maximum">
              <number>100</number>
             </property>
+            <property name="pageStep">
+             <number>0</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -406,7 +409,7 @@ QSlider::handle:horizontal {
              <number>1</number>
             </property>
             <property name="pageStep">
-             <number>10</number>
+             <number>0</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -561,6 +564,9 @@ QSlider::handle:horizontal {
             <property name="maximum">
              <number>100</number>
             </property>
+            <property name="pageStep">
+             <number>0</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -708,6 +714,9 @@ QSlider::handle:horizontal {
             <property name="maximum">
              <number>179</number>
             </property>
+            <property name="pageStep">
+             <number>0</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -849,6 +858,9 @@ QSlider::handle:horizontal {
             <property name="maximum">
              <number>100</number>
             </property>
+            <property name="pageStep">
+             <number>0</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -989,6 +1001,9 @@ QSlider::handle:horizontal {
             </property>
             <property name="maximum">
              <number>100</number>
+            </property>
+            <property name="pageStep">
+             <number>0</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1250,10 +1265,13 @@ QSlider::handle:horizontal {
              <number>50</number>
             </property>
             <property name="pageStep">
-             <number>5</number>
+             <number>0</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1395,6 +1413,9 @@ QSlider::handle:horizontal {
             </property>
             <property name="maximum">
              <number>100</number>
+            </property>
+            <property name="pageStep">
+             <number>0</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1654,7 +1675,7 @@ QScrollBar::add-line:vertical:pressed{
      </layout>
     </item>
     <item row="0" column="0">
-     <widget class="QScrollArea" name="ImageScrollArea">
+     <widget class="BetterScrollArea" name="ImageScrollArea">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1850,6 +1871,9 @@ QScrollBar::add-line:horizontal:pressed{
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>ArrowCursor</cursorShape>
              </property>
              <property name="mouseTracking">
               <bool>true</bool>
@@ -2225,6 +2249,12 @@ QToolBar QToolButton:unchecked{
    <class>SelectableImage</class>
    <extends>QLabel</extends>
    <header>SelectableImage.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BetterScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>BetterScrollArea.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

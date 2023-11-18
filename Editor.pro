@@ -11,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     AddCommand.cpp \
+    BetterScrollArea.cpp \
     ConvertImage.cpp \
     EffectLayer.cpp \
     Effects.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     AddCommand.h \
+    BetterScrollArea.h \
     ConvertImage.h \
     EffectLayer.h \
     Effects.h \

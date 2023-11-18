@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
 public slots:
     //Main options
     void OpenFile();
-    void SaveImage();
+    bool SaveImage();
     void ExitApplication();
     void SetPropertiesPage();
     void SetDefaultValues();
