@@ -18,5 +18,6 @@
         <file>Icons/rotateClockwise.png</file>
         <file>Icons/rotateCounterClockwise.png</file>
         <file>Icons/save.png</file>
+        <file>Icons/crossCursor.png</file>
     </qresource>
 </RCC>

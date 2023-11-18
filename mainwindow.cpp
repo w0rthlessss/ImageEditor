@@ -116,7 +116,8 @@ void MainWindow::SetDefaultValues(){
         if(it->GetIndex() == currentEffectIndex) it->SetValue(0);
     }
 
-    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, "Set default values"));
+    undoStack->push(new AddCommand(&imgForEditing, &effectLayers, previousState, effectLayers, &noiseMat, "Set default values"));
+
     previousState = effectLayers;
 
     UpdateImage();
@@ -132,7 +133,6 @@ void MainWindow::SetConnections(){
     connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(ExitApplication()));
     connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(SaveImage()));
 
-
     //Brightness
     connect(ui->brightnessSlider, &QSlider::valueChanged, ui->brightnessIntValue, &QSpinBox::setValue);
     connect(ui->brightnessSlider, &QSlider::sliderReleased, this, &MainWindow::CheckDifferences);
@@ -142,7 +142,6 @@ void MainWindow::SetConnections(){
     connect(ui->contrastSlider, &QSlider::valueChanged, ui->contrastIntValue, &QSpinBox::setValue);
     connect(ui->contrastSlider, &QSlider::sliderReleased, this, &MainWindow::CheckDifferences);
     connect(ui->contrastSlider, SIGNAL(valueChanged(int)), this, SLOT(ShowContrastEffect()));
-
 
     //Blur
     connect(ui->blurSlider, &QSlider::valueChanged, ui->blurIntValue, &QSpinBox::setValue);
@@ -279,8 +278,8 @@ void MainWindow::OpenFile(){
     }
 }
 
-void MainWindow::SaveImage(){
-    if(image.isNull()) return;
+bool MainWindow::SaveImage(){
+    if(image.isNull()) return false;
     const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
     QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"),
         picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
@@ -293,33 +292,36 @@ void MainWindow::SaveImage(){
         if(!writer.write(image)){
             QMessageBox msg(QMessageBox::Critical, MainWindow::windowTitle(),tr("Unable to save image!"));
             msg.exec();
-            return;
-
+            return false;
         }
         QMessageBox msg(QMessageBox::Information, MainWindow::windowTitle(), tr("Image was successfully saved!"));
         msg.exec();
         isSaved = true;
+        return true;
     }
+    return false;
 }
 
 void MainWindow::ExitApplication(){
     if(!isSaved){
         QMessageBox::StandardButton reply = QMessageBox::question(this, MainWindow::windowTitle(),
-            tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No);
-        if(reply == QMessageBox::Yes) SaveImage();
+                                                                  tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if(reply == QMessageBox::Yes) if(!SaveImage()) return;
+        if(reply == QMessageBox::Cancel) return;
     }
     close();
 
 }
 
-void MainWindow::closeEvent(QCloseEvent*){
+void MainWindow::closeEvent(QCloseEvent* event){
     ExitApplication();
+    event->ignore();
 }
 
 void MainWindow::CheckDifferences(){
     for(size_t i = 0; i<effectLayers.size(); i++){
         if(effectLayers[i] != previousState[i]){
-            undoStack->push(new AddCommand(&imgForEditing, imgForEditing, imgForEditing, &effectLayers, previousState, effectLayers, "Effect value changed"));
+            undoStack->push(new AddCommand(&imgForEditing, &effectLayers, previousState, effectLayers, &noiseMat, "Effect value changed"));
             previousState = effectLayers;
             break;
         }
@@ -505,7 +507,9 @@ void MainWindow::RotateClockwise(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_90_CLOCKWISE);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate 90"));
+
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 90"));
+
 
     UpdateImage();
 
@@ -518,7 +522,8 @@ void MainWindow::RotateCounterClockwise(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_90_COUNTERCLOCKWISE);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate -90"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate -90"));
+
 
     UpdateImage();
 
@@ -531,7 +536,8 @@ void MainWindow::RotateUpsideDown(){
 
     cv::rotate(imgForEditing, imgForEditing, cv::ROTATE_180);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Rotate 180"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 180"));
+
 
     UpdateImage();
 
@@ -544,7 +550,7 @@ void MainWindow::FlipHorizontal(){
 
     cv::flip(imgForEditing, imgForEditing, 1);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Flip Horizontal"));
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Flip Horizontal"));
 
     UpdateImage();
 
@@ -557,7 +563,8 @@ void MainWindow::FlipVertical(){
 
     cv::flip(imgForEditing, imgForEditing, 0);
 
-    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, effectLayers, effectLayers, "Flip Vertical"));
+
+    undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Flip Vertical"));
 
 
     UpdateImage();
@@ -580,11 +587,12 @@ void MainWindow::Crop(){
     height = std::min(height, imgForEditing.rows - y);
 
     cv::Mat cropped = imgForEditing(cv::Rect(x, y, width, height)).clone();
+    cv::Mat croppedNoise = noiseMat(cv::Rect(x, y, width, height)).clone();
 
-    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, cropped, &effectLayers, effectLayers, effectLayers, "Cropped" ));
+    undoStack->push(new AddCommand(&imgForEditing, imgForEditing, cropped, &effectLayers, effectLayers, effectLayers, &noiseMat, noiseMat, croppedNoise, "Cropped" ));
 
     imgForEditing = cropped.clone();
-
+    noiseMat = croppedNoise.clone();
     UpdateImage();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
