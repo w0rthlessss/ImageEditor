@@ -25,7 +25,6 @@ public slots:
     //Main options
     void OpenFile();
     bool SaveImage();
-    void ExitApplication();
     void SetPropertiesPage();
     void SetDefaultValues();
     void ZoomIn();
