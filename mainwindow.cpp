@@ -4,6 +4,7 @@
 #include <QImageWriter>
 #include <QMessageBox>
 #include <QIcon>
+#include <QImageReader>
 #include <QStandardPaths>
 #include "SelectableImage.h"
 #include "AddCommand.h"
@@ -128,7 +129,7 @@ void MainWindow::SetDefaultValues(){
 void MainWindow::SetConnections(){
     //Open, close and save
     connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(OpenFile()));
-    connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(ExitApplication()));
+    connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(close()));
     connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(SaveImage()));
 
     //Brightness
@@ -247,7 +248,18 @@ void MainWindow::OpenFile(){
         picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
         tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
     if(!filepath.isEmpty()){
-        image.load(filepath);     
+        image.load(filepath);
+        if(filepath.endsWith(".gif") ||
+            !(image.format() == QImage::Format_RGB32 ||
+            image.format() == QImage::Format_ARGB32 ||
+            image.format() == QImage::Format_ARGB32_Premultiplied ||
+            image.format() == QImage::Format_RGB888 ||
+            image.format() == QImage::Format_Indexed8)){
+                QMessageBox msg(QMessageBox::Critical, MainWindow::windowTitle(),tr("Image Editor does not support this image format!"));
+                msg.exec();
+                image = QImage();
+                return;
+        }
 
         effectLayers.clear();
 
@@ -281,9 +293,9 @@ void MainWindow::OpenFile(){
 bool MainWindow::SaveImage(){
     if(image.isNull()) return false;
     const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
-    QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"),
+    QString filepath = QFileDialog::getSaveFileName(this, tr("Save File as"),
         picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
-        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
+        tr("Images(*.jpg *.jpeg *.png)" ));
 
     if(!filepath.isEmpty()){
         UpdateImage();
@@ -302,20 +314,15 @@ bool MainWindow::SaveImage(){
     return false;
 }
 
-void MainWindow::ExitApplication(){
-    if(!isSaved){
-        QMessageBox::StandardButton reply = QMessageBox::question(this, MainWindow::windowTitle(),
-            tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
-        if(reply == QMessageBox::Yes) if(!SaveImage()) return;
-        if(reply == QMessageBox::Cancel) return;
-    }
-    close();
-
-}
 
 void MainWindow::closeEvent(QCloseEvent* event){
-    ExitApplication();
-    event->ignore();
+    if(!isSaved){
+        QMessageBox::StandardButton reply = QMessageBox::question(this, MainWindow::windowTitle(),
+                                                                  tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if(reply == QMessageBox::Yes) if(!SaveImage()) {event->ignore(); return;}
+        if(reply == QMessageBox::Cancel) {event->ignore(); return;}
+    }
+    close();
 }
 
 void MainWindow::CheckDifferences(){

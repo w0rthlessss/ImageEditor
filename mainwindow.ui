@@ -99,7 +99,7 @@ QWidget{
          <enum>QFrame::NoFrame</enum>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>7</number>
         </property>
         <widget class="QWidget" name="BasePage">
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1821,7 +1821,7 @@ QScrollBar::add-line:horizontal:pressed{
          <x>0</x>
          <y>0</y>
          <width>819</width>
-         <height>626</height>
+         <height>634</height>
         </rect>
        </property>
        <property name="sizePolicy">
