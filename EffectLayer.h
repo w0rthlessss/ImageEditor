@@ -20,7 +20,6 @@ public:
     int GetValue();
     void ApplyEffect(cv::Mat &imgAfter, cv::Mat imgBefore, int value);
     bool operator!=(const EffectLayer& other);
-    //cv::Mat GetLayer();
     ~EffectLayer() = default;
 };
 
