@@ -76,7 +76,7 @@ void MainWindow::UpdateScaleLabel(){
 }
 
 void MainWindow::UpdateResolutionLabel(){
-    QString resString = QString::number(image.width()) + "px x " + QString::number(image.height()) + "px";
+    QString resString = QString::number(imgForEditing.cols) + "px x " + QString::number(imgForEditing.rows) + "px";
     resolutionLabel->setText(resString);
 }
 
@@ -109,8 +109,6 @@ void MainWindow::SetDefaultValues(){
     int currentEffectIndex = ui->FilterProperties->currentIndex();
 
     if(currentEffectIndex==EffectNames::gray) ui->setGrayscaleBtn->setEnabled(true);
-
-
 
     for(auto it = effectLayers.begin(); it != effectLayers.end(); it++){
         if(it->GetIndex() == currentEffectIndex) it->SetValue(0);
@@ -170,6 +168,7 @@ void MainWindow::SetConnections(){
 
     //Grayscale
     connect(ui->setGrayscaleBtn, SIGNAL(clicked(bool)), this, SLOT(ShowGrayscaleEffect()));
+    connect(ui->setGrayscaleBtn, SIGNAL(clicked(bool)), this, SLOT(CheckDifferences()));
 
     //Exposure
     connect(ui->exposureSlider, &QSlider::valueChanged, ui->exposureIntValue, &QSpinBox::setValue);
@@ -248,10 +247,7 @@ void MainWindow::OpenFile(){
         picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last(),
         tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PNG (*.png)" ));
     if(!filepath.isEmpty()){
-        image.load(filepath);
-        UpdateResolutionLabel();
-        UpdateScaleLabel();
-        EnableInterface(true);
+        image.load(filepath);     
 
         effectLayers.clear();
 
@@ -264,6 +260,10 @@ void MainWindow::OpenFile(){
             ui->FilterProperties->setCurrentIndex(curPage);
             SetDefaultValues();
         }
+
+        UpdateResolutionLabel();
+        UpdateScaleLabel();
+        EnableInterface(true);
 
         Effects::MakeNoiseMap(originalImage);
         SetupEffectLayers();
@@ -305,7 +305,7 @@ bool MainWindow::SaveImage(){
 void MainWindow::ExitApplication(){
     if(!isSaved){
         QMessageBox::StandardButton reply = QMessageBox::question(this, MainWindow::windowTitle(),
-                                                                  tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+            tr("Image was not saved!\nDo you want to save it?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
         if(reply == QMessageBox::Yes) if(!SaveImage()) return;
         if(reply == QMessageBox::Cancel) return;
     }
@@ -338,7 +338,7 @@ void MainWindow::UpdateSliderValues(){
             QSlider* slider = currentPage->findChild<QSlider*>();
             slider->setValue(it->GetValue());
         }
-        else ui->setGrayscaleBtn->setEnabled(it->GetValue());
+        else ui->setGrayscaleBtn->setEnabled(!it->GetValue());
 
     }
 }
@@ -351,6 +351,8 @@ void MainWindow::UndoAction(){
         UpdateSliderValues();
     }
 
+    UpdateResolutionLabel();
+
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
 }
@@ -361,6 +363,9 @@ void MainWindow::RedoAction(){
         UpdateImage();
         UpdateSliderValues();
     }
+
+    UpdateResolutionLabel();
+
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
 }
@@ -512,6 +517,7 @@ void MainWindow::RotateClockwise(){
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 90"));
 
     UpdateImage();
+    UpdateResolutionLabel();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
@@ -525,6 +531,7 @@ void MainWindow::RotateCounterClockwise(){
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate -90"));
 
     UpdateImage();
+    UpdateResolutionLabel();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
@@ -538,6 +545,7 @@ void MainWindow::RotateUpsideDown(){
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Rotate 180"));
 
     UpdateImage();
+    UpdateResolutionLabel();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
@@ -551,6 +559,7 @@ void MainWindow::FlipHorizontal(){
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Flip Horizontal"));
 
     UpdateImage();
+    UpdateResolutionLabel();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
@@ -564,6 +573,7 @@ void MainWindow::FlipVertical(){
     undoStack->push(new AddCommand(&imgForEditing, imgBefore, imgForEditing, &effectLayers, &noiseMat, "Flip Vertical"));
 
     UpdateImage();
+    UpdateResolutionLabel();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
     else DisplayImage(ConvertImage::CVMatToQImage(imgForDisplay));
@@ -589,6 +599,7 @@ void MainWindow::Crop(){
 
     imgForEditing = cropped.clone();
     noiseMat = croppedNoise.clone();
+    UpdateResolutionLabel();
     UpdateImage();
 
     if(scaleValue != 1.0) ScaleImage(0.0);
